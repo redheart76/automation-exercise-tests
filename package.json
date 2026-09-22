@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --max-warnings=0",
-    "lint:fix": "eslint . --fix --max-warnings=0"
+    "lint:fix": "eslint . --fix --max-warnings=0",
+    "check": "npm run typecheck && npm run lint",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
