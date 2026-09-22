@@ -7,7 +7,9 @@
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix --max-warnings=0",
     "check": "npm run typecheck && npm run lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:api:dev": "TEST_ENV=dev playwright test tests/api/verify-login.spec.ts --project=chromium",
+    "test:api:test": "TEST_ENV=test playwright test tests/api/verify-login.spec.ts --project=chromium"
   },
   "repository": {
     "type": "git",

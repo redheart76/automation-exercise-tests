@@ -3,12 +3,34 @@ import { test as base, expect } from '@playwright/test';
 import { createAccountsApi } from '../api/accounts';
 import { createUser, type UserData } from '../data/user';
 import { environment } from '../../config/environment';
+import { checkAvailability, type Availability } from '../../config/availability';
 
 type Fixtures = {
   registeredUser: UserData;
+  environmentReady: void;
 };
 
-export const test = base.extend<Fixtures>({
+type WorkerFixtures = {
+  environmentAvailability: Availability;
+};
+
+export const test = base.extend<Fixtures, WorkerFixtures>({
+  environmentAvailability: [async ({ playwright }, use) => {
+    const context = await playwright.request.newContext();
+    let availability: Availability;
+    try {
+      availability = await checkAvailability(context, environment.baseUrl);
+    } finally {
+      await context.dispose();
+    }
+    await use(availability);
+  }, { scope: 'worker' }],
+
+  environmentReady: [async ({ environmentAvailability }, use) => {
+    base.skip(!environmentAvailability.reachable, environmentAvailability.reason);
+    await use();
+  }, { auto: true }],
+
   registeredUser: async ({ request }, use) => {
     const accounts = createAccountsApi(request, environment.baseUrl);
     const user = createUser();

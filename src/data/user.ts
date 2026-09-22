@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { environment } from '../../config/environment';
 
 export type UserData = {
   name: string;
@@ -31,7 +32,7 @@ export function createUser(): UserData {
       lastName,
       provider: 'example.com',
     }),
-    password: faker.internet.password({ length: 16 }),
+    password: environment.password,
     title: 'Mr',
     birth_date: '10',
     birth_month: '5',
