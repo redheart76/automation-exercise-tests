@@ -1,0 +1,22 @@
+{
+  "name": "automation-exercise-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://redheart76@github.com/redheart76/automation-exercise-tests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/redheart76/automation-exercise-tests/issues"
+  },
+  "homepage": "https://github.com/redheart76/automation-exercise-tests#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.2"
+  }
+}
