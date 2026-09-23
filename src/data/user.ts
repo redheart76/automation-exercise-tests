@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { randomUUID } from 'node:crypto';
 import { environment } from '../../config/environment';
 
 export type UserData = {
@@ -27,11 +28,7 @@ export function createUser(): UserData {
 
   return {
     name: `${firstName} ${lastName}`,
-    email: faker.internet.email({
-      firstName,
-      lastName,
-      provider: 'example.com',
-    }),
+    email: `test-${randomUUID()}@example.com`,
     password: environment.password,
     title: 'Mr',
     birth_date: '10',

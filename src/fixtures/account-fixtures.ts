@@ -7,6 +7,7 @@ import { checkAvailability, type Availability } from '../../config/availability'
 
 type Fixtures = {
   registeredUser: UserData;
+  unregisteredUser: UserData;
   environmentReady: void;
 };
 
@@ -30,6 +31,23 @@ export const test = base.extend<Fixtures, WorkerFixtures>({
     base.skip(!environmentAvailability.reachable, environmentAvailability.reason);
     await use();
   }, { auto: true }],
+
+  unregisteredUser: async ({ request }, use) => {
+    const user = createUser();
+    const accounts = createAccountsApi(request, environment.baseUrl);
+    try {
+      await use(user);
+    } finally {
+      // Registration may fail before creating an account, or the UI may already delete it.
+      const response = await accounts.deleteAccount(user.email, user.password);
+      expect(response.ok(), 'UI account cleanup HTTP status').toBe(true);
+      const body = await response.json();
+      expect([
+        { responseCode: 200, message: 'Account deleted!' },
+        { responseCode: 404, message: 'Account not found!' },
+      ]).toContainEqual(body);
+    }
+  },
 
   registeredUser: async ({ request }, use) => {
     const accounts = createAccountsApi(request, environment.baseUrl);
