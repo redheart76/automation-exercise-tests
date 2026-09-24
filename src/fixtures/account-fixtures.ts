@@ -28,6 +28,9 @@ export const test = base.extend<Fixtures, WorkerFixtures>({
   }, { scope: 'worker' }],
 
   environmentReady: [async ({ environmentAvailability }, use) => {
+    if (process.env.REQUIRE_LIVE === '1' && !environmentAvailability.reachable) {
+      throw new Error(environmentAvailability.reason ?? 'The selected environment is unreachable');
+    }
     base.skip(!environmentAvailability.reachable, environmentAvailability.reason);
     await use();
   }, { auto: true }],

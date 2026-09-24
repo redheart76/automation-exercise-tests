@@ -31,6 +31,7 @@ export default defineConfig({
     /* Record each test and retain the trace on failure, including without retries. */
     trace: 'retain-on-failure',
     testIdAttribute: 'data-qa',
+    headless: true,
   },
 
   /* Configure projects for major browsers */

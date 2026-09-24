@@ -8,6 +8,10 @@
     "lint:fix": "eslint . --fix --max-warnings=0",
     "check": "npm run typecheck && npm run lint",
     "typecheck": "tsc --noEmit",
+    "test": "playwright test tests/api tests/ui --project=chromium",
+    "test:ui:dev": "TEST_ENV=dev playwright test tests/ui --project=chromium",
+    "test:ui:test": "TEST_ENV=test playwright test tests/ui --project=chromium",
+    "verify": "npm run check && npm test",
     "test:api:dev": "TEST_ENV=dev playwright test tests/api/verify-login.spec.ts --project=chromium",
     "test:api:test": "TEST_ENV=test playwright test tests/api/verify-login.spec.ts --project=chromium"
   },
