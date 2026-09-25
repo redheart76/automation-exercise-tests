@@ -28,6 +28,9 @@ npx playwright install chromium
 
 On a Linux CI runner, use `npx playwright install --with-deps chromium` so operating-system browser dependencies are installed as well.
 
+Install @faker for creating testing data
+npm i @faker-js/faker 
+
 ## Environment selection
 
 The default environment is dev (https://automationexercise.com). To run against the test environment, set TEST_ENV=test:
