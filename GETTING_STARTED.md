@@ -25,11 +25,10 @@ If the repository is private, the GitHub account used for cloning must have acce
 npm ci
 npx playwright install chromium
 ```
+`npm ci` installs all project dependencies, including Playwright and Faker.
+`npx playwright install chromium` installs the browser used by the tests.
 
-On a Linux CI runner, use `npx playwright install --with-deps chromium` so operating-system browser dependencies are installed as well.
-
-Install @faker for creating testing data
-npm i @faker-js/faker 
+On Linux, use npx playwright install --with-deps chromium to install Chromium and its system dependencies. The GitHub Actions workflow already includes this step.
 
 ## Environment selection
 
@@ -54,7 +53,7 @@ On PowerShell, set the variable on a separate line, for example `$env:TEST_ENV =
 | `npm run test:ui:test` | UI tests against test |
 | `npm run test:api:dev` | API tests against dev |
 | `npm run test:api:test` | API tests against test |
-| `npm run verify` | Checks followed by the required test suite |
+| `npm run verify` | Runs type checking, linting, and the tests |
 
 Tests run headlessly by default. To see the browser locally:
 

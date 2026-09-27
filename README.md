@@ -23,6 +23,9 @@ npm ci
 npx playwright install chromium
 npm run verify
 ```
+`npm ci` installs all project dependencies, including Playwright and Faker.
+`npx playwright install chromium` installs the browser used by the tests.
+`npm run verify` runs type checking, linting, and the tests.
 
 ## CI result
 
