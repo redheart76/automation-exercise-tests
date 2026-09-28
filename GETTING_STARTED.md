@@ -32,16 +32,16 @@ On Linux, use npx playwright install --with-deps chromium to install Chromium an
 
 ## Environment selection
 
-The default environment is dev (https://automationexercise.com). To run against the test environment, set TEST_ENV=test:
+The default environment is dev (https://automationexercise.com). The test scripts set the selected environment automatically. To run against the test environment:
 
 ```bash
-TEST_ENV=test npm run test:ui:test
-TEST_ENV=test npm run test:api:test
+npm run test:ui:test
+npm run test:api:test
 ```
 
 The passwords in the environment configuration come from the exercise and are used for generated users. They are not stored in a .env file. REQUIRE_LIVE=1 makes an unreachable environment fail the run; without it, the fixtures skip tests when the host cannot be reached.
 
-On PowerShell, set the variable on a separate line, for example `$env:TEST_ENV = 'test'; npm run test:ui:test`.
+The scripts use `cross-env` to set `TEST_ENV` consistently on Windows, macOS, and Linux.
 
 ## Run commands
 
